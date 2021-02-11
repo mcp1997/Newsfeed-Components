@@ -86,6 +86,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Matt Phillips creates a new Article. Amazing.',
+    date: 'Feb 10th, 2021',
+    firstParagraph: `It's extremely hard to believe, but Matt Phillips has done it again: He's written a new article. I'm sure you want to find out more. Continue reading.`,
+
+    secondParagraph: `If you are shocked merely by this single article's existence, you're gonna want to sit down for this next bit if you aren't sitting already. It's a doozy.`,
+
+    thirdParagraph: `As it turns out, Matt Phillips ALSO wrote the code that displays ALL of the articles on this page... as if he didn't do enough already. A true hero of our time.`,
   }
 ];
 
@@ -114,3 +123,58 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(articleObj){
+  const article = document.createElement('div');
+  const artTitle = document.createElement('h2');
+  const artDate = document.createElement('p');
+  const artContent1 = document.createElement('p');
+  const artContent2 = document.createElement('p'); 
+  const artContent3 = document.createElement('p');  
+  const button = document.createElement('span');
+
+  article.appendChild(artTitle);
+  article.appendChild(artDate);
+  article.appendChild(artContent1);
+  article.appendChild(artContent2);
+  article.appendChild(artContent3);
+  article.appendChild(button);
+
+  article.classList.add('article');
+  artDate.classList.add('date');
+  button.classList.add('expandButton');
+
+  artTitle.textContent = articleObj.title;
+  artDate.textContent = articleObj.date;
+  artContent1.textContent = articleObj.firstParagraph;
+  artContent2.textContent = articleObj.secondParagraph;
+  artContent3.textContent = articleObj.thirdParagraph;
+  button.textContent = '+';
+
+  button.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+  });
+
+  return article;
+}
+
+let articlesMap = data.map( (item) => {
+  let newArr = articleMaker(item);
+  return newArr;
+});
+
+let articles = document.querySelector('.articles');
+
+articlesMap.forEach( (item) => {
+  articles.appendChild(item);
+});
+
+// const sample = {
+//   title: 'blah',
+//   date: 'blah/blah/blah',
+//   firstParagraph: 'blah1',
+//   secondParagraph: 'blah2',
+//   thirdParagraph: 'blah3',
+// }
+
+// console.log(articleMaker(sample));
